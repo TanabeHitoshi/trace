@@ -1,0 +1,13 @@
+basic.forever(function () {
+    basic.showIcon(IconNames.Heart)
+    serial.writeValue("0", pins.analogReadPin(AnalogPin.P0))
+    serial.writeValue("1", pins.analogReadPin(AnalogPin.P1))
+    serial.writeValue("2", pins.analogReadPin(AnalogPin.P2))
+    serial.writeLine("-------------------------------------------------")
+    serial.writeValue("x", input.acceleration(Dimension.X))
+    serial.writeValue("y", input.acceleration(Dimension.Y))
+    serial.writeValue("z", input.acceleration(Dimension.Z))
+    pins.digitalWritePin(DigitalPin.P15, 0)
+    pins.digitalWritePin(DigitalPin.P14, 0)
+    pins.analogWritePin(AnalogPin.P13, 454)
+})

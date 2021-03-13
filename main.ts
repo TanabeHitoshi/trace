@@ -1,4 +1,9 @@
+let 差分 = 0
 let 右スピード = 0
+function ライン位置 () {
+    差分 = pins.analogReadPin(AnalogPin.P2) - pins.analogReadPin(AnalogPin.P1)
+    return 差分
+}
 function 右モーター (スピード: number) {
     右スピード = スピード
     if (右スピード >= 0) {
@@ -21,7 +26,7 @@ basic.forever(function () {
     serial.writeValue("0", pins.analogReadPin(AnalogPin.P0))
     serial.writeValue("1", pins.analogReadPin(AnalogPin.P1))
     serial.writeValue("2", pins.analogReadPin(AnalogPin.P2))
-    serial.writeValue("line_pos", pins.analogReadPin(AnalogPin.P2) - pins.analogReadPin(AnalogPin.P1))
+    serial.writeValue("line_pos", ライン位置())
     serial.writeLine("-------------------------------------------------")
     右モーター(0)
 })

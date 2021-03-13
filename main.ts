@@ -1,5 +1,5 @@
 basic.forever(function () {
-    basic.showIcon(IconNames.Heart)
+    basic.showIcon(IconNames.No)
     serial.writeValue("0", pins.analogReadPin(AnalogPin.P0))
     serial.writeValue("1", pins.analogReadPin(AnalogPin.P1))
     serial.writeValue("2", pins.analogReadPin(AnalogPin.P2))

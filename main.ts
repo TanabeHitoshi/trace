@@ -14,13 +14,21 @@ function 左モーター (スピード: number) {
         pins.digitalWritePin(DigitalPin.P12, 1)
         pins.digitalWritePin(DigitalPin.P16, 0)
     }
+    // 正転のリミット
     if (左スピード > 1024) {
         左スピード = 1023
     }
+    // 逆転のリミット
     if (左スピード < -1023) {
         左スピード = -1023
     }
-    pins.analogWritePin(AnalogPin.P8, Math.abs(左スピード))
+    // ブレーキ
+    if (左スピード == 0) {
+        pins.digitalWritePin(DigitalPin.P12, 1)
+        pins.digitalWritePin(DigitalPin.P16, 1)
+    } else {
+        pins.analogWritePin(AnalogPin.P8, Math.abs(左スピード))
+    }
 }
 function 右モーター (スピード: number) {
     右スピード = スピード
@@ -31,13 +39,21 @@ function 右モーター (スピード: number) {
         pins.digitalWritePin(DigitalPin.P15, 1)
         pins.digitalWritePin(DigitalPin.P14, 0)
     }
+    // 正転のリミット
     if (右スピード > 1024) {
         右スピード = 1023
     }
+    // 逆転のリミット
     if (右スピード < -1023) {
         右スピード = -1023
     }
-    pins.analogWritePin(AnalogPin.P13, Math.abs(右スピード))
+    // ブレーキ
+    if (右スピード == 0) {
+        pins.digitalWritePin(DigitalPin.P14, 1)
+        pins.digitalWritePin(DigitalPin.P15, 1)
+    } else {
+        pins.analogWritePin(AnalogPin.P13, Math.abs(右スピード))
+    }
 }
 basic.forever(function () {
     basic.showIcon(IconNames.Heart)

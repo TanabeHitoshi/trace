@@ -12,6 +12,12 @@ function ライン位置 () {
     差分 = pins.analogReadPin(AnalogPin.P2) - pins.analogReadPin(AnalogPin.P1)
     return 差分
 }
+function 走る (スピード: number, 回転速度: number) {
+    左スピード = スピード - 回転速度
+    右スピード = スピード + 回転速度
+    左モーター(左スピード)
+    右モーター(右スピード)
+}
 function 左モーター (スピード: number) {
     左スピード = スピード
     if (左スピード >= 0) {
@@ -66,5 +72,5 @@ basic.forever(function () {
     basic.showIcon(IconNames.Heart)
     右モーター(0)
     左モーター(0)
-    ライン位置()
+    走る(600, ライン位置())
 })

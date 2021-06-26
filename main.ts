@@ -1,3 +1,11 @@
+let kp = 0
+let kd = 0
+let 差分 = 0
+let 微分 = 0
+let 前差分 = 0
+let 制御量 = 0
+let 左スピード = 0
+let 右スピード = 0
 function モニタ () {
     serial.writeValue("0", pins.analogReadPin(AnalogPin.P0))
     serial.writeValue("1", pins.analogReadPin(AnalogPin.P1))
@@ -6,9 +14,13 @@ function モニタ () {
     serial.writeLine("-------------------------------------------------")
 }
 function ライン位置 () {
+    kp = 2
+    kd = -1
     差分 = pins.analogReadPin(AnalogPin.P1) - pins.analogReadPin(AnalogPin.P2)
-    差分 = 差分 * 1
-    return 差分
+    微分 = 差分 - 前差分
+    制御量 = 差分 * kp - 微分 * kd
+    前差分 = 差分
+    return 制御量
 }
 function 走る (スピード: number, 回転速度: number) {
     左スピード = スピード - 回転速度
@@ -66,10 +78,6 @@ function 右モーター (スピード: number) {
         pins.analogWritePin(AnalogPin.P13, Math.abs(右スピード))
     }
 }
-let 右スピード = 0
-let 左スピード = 0
-let 差分 = 0
-basic.showIcon(IconNames.Heart)
 basic.forever(function () {
     右モーター(0)
     左モーター(0)

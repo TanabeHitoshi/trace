@@ -40,7 +40,7 @@ function 左モーター (スピード: number) {
         pins.digitalWritePin(DigitalPin.P16, 0)
     }
     // 正転のリミット
-    if (左スピード > 1024) {
+    if (左スピード > 1023) {
         左スピード = 1023
     }
     // 逆転のリミット
@@ -121,7 +121,7 @@ basic.forever(function () {
             pattern = 100
         }
         右手()
-        走る(700, ライン位置())
+        走る(1000, ライン位置())
     }
     if (pattern == 20) {
         serial.writeValue("n", 右手())

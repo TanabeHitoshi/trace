@@ -34,9 +34,9 @@ def on_button_pressed_b():
     pattern = 20
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
-def 左モーター(スピード: number):
+def 左モーター(スピード2: number):
     global 左スピード
-    左スピード = スピード
+    左スピード = スピード2
     if 左スピード >= 0:
         pins.digital_write_pin(DigitalPin.P12, 0)
         pins.digital_write_pin(DigitalPin.P16, 1)
@@ -55,9 +55,9 @@ def 左モーター(スピード: number):
         pins.digital_write_pin(DigitalPin.P16, 1)
     else:
         pins.analog_write_pin(AnalogPin.P8, abs(左スピード))
-def 右モーター(スピード: number):
+def 右モーター(スピード3: number):
     global 右スピード
-    右スピード = スピード
+    右スピード = スピード3
     if 右スピード >= 0:
         pins.digital_write_pin(DigitalPin.P15, 0)
         pins.digital_write_pin(DigitalPin.P14, 1)
@@ -99,11 +99,11 @@ kp = 0
 pattern = 0
 basic.show_leds("""
     . # # # .
-    . . # . .
-    . . # . .
-    # . # . .
-    . # . . .
-    """)
+        . . # . .
+        . . # . .
+        # . # . .
+        . # . . .
+""")
 右モーター(0)
 左モーター(0)
 pattern = 0
@@ -115,7 +115,7 @@ def on_forever():
         if 右手回数 == 3:
             pattern = 100
         右手()
-        走る(700, ライン位置())
+        走る(1000, ライン位置())
     if pattern == 20:
         serial.write_value("n", 右手())
         モニタ()
